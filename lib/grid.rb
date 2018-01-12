@@ -25,7 +25,7 @@ class Grid
   end
 
   def full?
-    (to_s =~ /0/).nil?
+    (display =~ /\|0\|/).nil?
   end
 
   def having_a_winner?

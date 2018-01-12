@@ -38,6 +38,18 @@ describe Grid do
     g
   end
 
+  let(:full_grid_no_winner) do
+    g = Grid.new
+    [0, 1, 4, 5].each do |x|
+      6.times { g.insert_coin(x) }
+    end
+    g.insert_coin(6)
+    6.times { g.insert_coin(3) }
+    6.times { g.insert_coin(2) }
+    5.times { g.insert_coin(6) }
+    g
+  end
+
   describe '#initialize' do
     it 'creates a Grid instance' do
       expect(empty_grid).to be_instance_of Grid
@@ -57,9 +69,12 @@ describe Grid do
   end
 
   describe '#full?' do
-    it 'returns false if not full' do
+    it 'returns false if it\'s not full' do
       expect(empty_grid).not_to be_full
       expect(grid_with_coins).not_to be_full
+    end
+    it 'returns true if it\'s full' do
+      expect(full_grid_no_winner).to be_full
     end
   end
 
