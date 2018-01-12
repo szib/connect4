@@ -1,14 +1,19 @@
+require 'remedy'
 require './lib/grid.rb'
 
+include Remedy
+
+slot = Interaction.new
 grid = Grid.new
 puts grid.print
 
-until grid.full? || grid.having_a_winner?
+slot.loop do |key|
+  exit if key.to_s.casecmp('q').zero?
+
   puts 'Which slot? (1-7, q for quit) ==> ' unless grid.having_a_winner?
-  slot = gets.chomp
-  exit if slot.downcase == 'q'
-  grid.insert_coin(slot.to_i-1)
+  grid.insert_coin(key.value.to_i - 49) if key.value.to_i.between?(49, 55)
   puts grid.print
+  break if grid.full? || grid.having_a_winner?
 end
 
 if grid.having_a_winner?
