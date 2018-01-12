@@ -75,13 +75,14 @@ class Grid
   end
 
   def print
-    puts "\n\nTurn: #{@turn + 1}\n"
+    puts "\n\n\tTurn: #{@turn + 1}\n\n"
     s = "\t|#{(1..7).map(&:to_s).join(' ')}|"
     puts s
     puts s.gsub(/\d/, ' ')
     puts display.gsub(/1/, @marks[1]).gsub(/2/, @marks[2]).gsub(/0/, @marks[0])
     puts "\t" + '-' * 15
-    puts "\nNext player is #{@turn.odd? ? marks[1] : marks[2]}" if @winner.nil?
+    puts "\n\tNext player is #{@turn.odd? ? marks[1] : marks[2]}\n\n" if @winner.nil?
+    puts 'Which slot? (1-7, q for quit) ==> ' if @winner.nil?
   end
 
   def to_a
