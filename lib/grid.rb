@@ -3,7 +3,7 @@ require './lib/column.rb'
 class Grid
   attr_reader :grid, :winner, :turn, :marks
 
-  def initialize(marks = ['.', 'X', 'O'])
+  def initialize(marks = ["\u00b7", "\u2716", "\u25c9"])
     @grid = []
     7.times do
       @grid.push(Column.new)
@@ -76,11 +76,15 @@ class Grid
 
   def print
     puts "\n\n\tTurn: #{@turn + 1}\n\n"
-    s = "\t|#{(1..7).map(&:to_s).join(' ')}|"
+    s = "\t\u2503#{(1..7).map(&:to_s).join(' ')}\u2503"
     puts s
     puts s.gsub(/\d/, ' ')
-    puts display.gsub(/1/, @marks[1]).gsub(/2/, @marks[2]).gsub(/0/, @marks[0])
-    puts "\t" + '-' * 15
+    d = display
+    @marks.each.with_index do |mark, key|
+      d.gsub!(/#{key}/, mark)
+    end
+    puts d.gsub(/\|/,"\u2503")
+    puts "\t" + "\u2517" + "\u2501\u253b" * 6 + "\u2501\u251b"
     puts "\n\tNext player is #{@turn.odd? ? marks[1] : marks[2]}\n\n" if @winner.nil?
     puts 'Which slot? (1-7, q for quit) ==> ' if @winner.nil?
   end
