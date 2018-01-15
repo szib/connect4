@@ -17,5 +17,5 @@ end
 if grid.having_a_winner?
   puts "The winner is: #{grid.marks[grid.winner]}"
 else
-  puts "It's a draw." unless grid.having_a_winner?
+  puts "It's a draw."
 end
